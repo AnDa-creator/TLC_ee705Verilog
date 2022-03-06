@@ -37,9 +37,9 @@ module TLC_main(
     always @(*) begin
         // Peak condition cases
         if (peak) begin
-            TL1 <= TL6; 
-            TL2 <= TL4;
-            TL3 <= TL5;
+            TL6 <= TL1; 
+            TL4 <= TL2;
+            TL5 <= TL3;
             case(TL1)
                 0:if (Timer == 32) begin
                     Timer <= 0;
@@ -270,7 +270,7 @@ module TLC_main(
             end
         end            
     end
-
+endmodule
     
 
 

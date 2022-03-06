@@ -186,17 +186,67 @@ module TLC_main(
             end
             // when sensor2 is only activated 
             else if (sensor1 = 0 && sensor1 = 1) begin 
-                TL4 <= TL2;
+                TL6 <= TL1;
                 case(TL1)
                     0:if (Timer == 16) begin
                         Timer <= 0;
                         TL1 <= 1;
-                        TL6 <= TL1;
                     end
                     1:if (Timer == 4) begin
                         Timer <= 0;
                         TL1 <= 2;
-                        TL6 <= TL1;
+                    end 
+                    2:if (Timer == 4) && (TL2 == 2) && (TL3 == 2) begin
+                        Timer <= 0;
+                        TL4 <= 0;
+                    end 
+                endcase
+                case(TL4)
+                    0:if (Timer == 16) begin
+                        Timer <= 0;
+                        TL4 = 1;
+                        TL2 <= TL4;
+                    end
+                    1:if (Timer == 4) begin
+                        Timer <= 0;
+                        TL4 = 2;
+                        TL2 <= TL4;
+                    end 
+                    2:if (Timer == 4) && (TL1 == 2) && (TL5 == 2) begin
+                        Timer <= 0;
+                        TL5 <= 0;
+                    end 
+                endcase
+                case(TL5)
+                    0:if (Timer == 8) begin
+                        Timer <= 0;
+                        TL5 = 1;
+                        TL2 <= TL5;
+                    end
+                    1:if (Timer == 4) begin
+                        Timer <= 0;
+                        TL5 <= 2;
+                        TL2 <= TL5;
+                    end 
+                    2:if (Timer == 4) && (TL1 == 2) && (TL4 == 2) begin
+                        Timer <= 0;
+                        TL5 <= 0;
+                        TL2 <= TL5;
+                    end 
+                endcase
+            end
+            // when all sensors are deactivated
+            else begin
+                TL1 <= TL6; 
+                TL2 <= TL4;
+                case(TL1)
+                    0:if (Timer == 16) begin
+                        Timer <= 0;
+                        TL1 <= 1;
+                    end
+                    1:if (Timer == 4) begin
+                        Timer <= 0;
+                        TL1 <= 2;
                     end 
                     2:if (Timer == 4) && (TL2 == 2) && (TL3 == 2) begin
                         Timer <= 0;
@@ -212,30 +262,12 @@ module TLC_main(
                         Timer <= 0;
                         TL2 <= 2;
                     end 
-                    2:if (Timer == 4) && (TL1 == 2) && (TL3 == 2) begin
-                        Timer <= 0;
-                        TL3 <= 0;
-                    end 
-                endcase
-                case(TL3)
-                    0:if (Timer == 8) begin
-                        Timer <= 0;
-                        TL3 <= 1;
-                        TL6 <= TL3;
-                    end
-                    1:if (Timer == 4) begin
-                        Timer <= 0;
-                        TL3 <= 2;
-                        TL6 <= TL3;
-                    end 
-                    2:if (Timer == 4) && (TL1 == 2) && (TL2 == 2) begin
+                    2:if (Timer == 4) && (TL1 == 2) begin
                         Timer <= 0;
                         TL1 <= 0;
-                        TL6 <= TL3;
                     end 
-                endcase
+                endcase                
             end
-            // when all sensors are deactivated
         end            
     end
 

@@ -1,4 +1,4 @@
-module 12hr_clock(
+module TwelveHourBCDclock(
     input clk,
     input reset,
     input ena,

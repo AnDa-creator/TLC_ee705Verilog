@@ -15,28 +15,31 @@ module TLC_main(
     reg peak,f16,f24,f35,f36,f25;
 
     // Do peak off-peak inputs from separate file
-
+    
+    
+    
     integer Timer;
 
     initial begin
 	 
-	 
-        Timer <= 0;         // Set Timer to zero initially
+        // Set Timer and flags to 0
+        Timer <= 0;         
         f16 <= 0;
         f24 <= 0;
         f35 <= 0;
-		  f36 <= 0;
-		  f25 <= 0;
+		f36 <= 0;
+		f25 <= 0;
     end	 
 	 
 	 // Reset conditions below , Initializes to TL1, TL6 green.
 	 
     always @(posedge clk) 
     if (reset == 0) begin
+        //initialize lights and flags
         Timer <= 0;
         TL1 <= 0;         TL2 <= 2;         TL3 <= 2;        TL4 <= 2;        TL5 <= 2;   
         TL6 <= 0;         f16 <= 0;         f24 <= 0;        f35 <= 0;  		f36 <= 0;
-		  f25 <= 0;    //initialize lights and flags
+		f25 <= 0;    
     end
 
     

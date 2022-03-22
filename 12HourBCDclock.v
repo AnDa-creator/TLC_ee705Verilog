@@ -2,10 +2,10 @@ module TwelveHourBCDclock(
     input clk,
     input reset,
     input ena,
-    output pm,
-    output [7:0] hh,
-    output [7:0] mm,
-    output [7:0] ss); 
+    output reg pm,
+    output reg [7:0] hh,
+    output reg [7:0] mm,
+    output reg [7:0] ss); 
     
     // Starting from 1 am
     initial 

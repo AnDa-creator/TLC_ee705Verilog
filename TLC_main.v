@@ -23,11 +23,10 @@ module TLC_main(
 	 
         // Set Timer and flags to 0
         Timer <= 0;         
-        f16 <= 0;
-        f24 <= 0;
-        f35 <= 0;
-		f36 <= 0;
-		f25 <= 0;
+        Timer <= 0;
+        TL1 <= 0;         TL2 <= 2;         TL3 <= 2;        TL4 <= 2;        TL5 <= 2;   
+        TL6 <= 0;         f16 <= 0;         f24 <= 0;        f35 <= 0;  		f36 <= 0;
+        f25 <= 0;  
     end	 
 	 
 	 // Reset conditions below , Initializes to TL1, TL6 green.
@@ -52,11 +51,7 @@ module TLC_main(
 	 
     // Peak condition cases
         if (peak) begin
-		  
-		  
-            TL1 <= TL6; 
-            TL2 <= TL4;
-            TL3 <= TL5;
+            // Peak conditions
             case(TL1)
                 0:if (Timer == 32) begin
                     Timer <= 0;
@@ -105,6 +100,9 @@ module TLC_main(
                     f35 <= 0;
                 end 
             endcase
+            TL6 <= TL1; 
+            TL4 <= TL2;
+            TL5 <= TL3;
         end
     // Off-Peak condition cases
         

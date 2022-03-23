@@ -8,12 +8,15 @@ module TwelveHourBCDclock(
     output reg [7:0] ss); 
     
     // Starting from 1 am
-    initial 
+    initial begin
         hh = 8'b00000001;
-    
+        ss = 8'b00000000;
+        mm = 8'b00000000;
+        pm = 1'b1;
+    end
         
     
-    // Logic changes at positive edge of clock, reset synchronous
+    // Logic changes at positive edge of clock, reset synchronous active low
     always @(posedge clk) begin
 
         // Count of register for Seconds increases at ena == 1, BCD encoding is done
@@ -60,11 +63,11 @@ module TwelveHourBCDclock(
         end
 
         // Logic to reset the clock
-        if(reset) begin
+        if(~reset) begin
             ss <= 0;
-            hh[7:4] <= 1;
-            hh[3:0] <= 2;
-            pm <= 0;
+            hh[7:4] <= 0;
+            hh[3:0] <= 1;
+            pm <= 1;
             mm <= 0;
         end
     end

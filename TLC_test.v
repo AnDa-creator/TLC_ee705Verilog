@@ -18,20 +18,25 @@ TLC_topModule dut0 (
     .peak(peak), .pm(pm), .hh(hh), .mm(mm), .ss(ss)
 );
 
-always begin
-    #1 clk = ~clk ;
-    #1000 sensor1 = ~sensor1;
-    #500 sensor2 = ~sensor2;
-end
+// generate the clock
+
+ initial begin
+
+   clk = 1'b0;
+   sensor1 = 0; sensor2 = 0;
+   forever #1 clk = ~clk;
+   forever #1000 sensor1 = ~sensor1;
+   forever #500 sensor2 = ~sensor2;
+ end
 
  initial begin
    $dumpvars();
 
-    clk = 0; reset = 0; ena = 1; sensor1 = 0; sensor2 = 0;
+    reset = 0; ena = 1; 
 
     #10 reset = 1; 
 
-    #86400 $finish;
+    #500 $finish;
  end
 
 endmodule

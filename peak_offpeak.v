@@ -4,7 +4,7 @@ module peak_offpeak(
     output reg peak);
 
 // Peak Hour Periods -- 0700 – 0900, 1200 – 1400 and 1700 – 1900 hours
-
+// Edit on Parth's PC
 initial 
     peak = 0;
 

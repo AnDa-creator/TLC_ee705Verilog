@@ -165,16 +165,15 @@ module TLC_main(
         	// when only sensor1 is activated
 			else if ((sensor1 == 1) && (sensor2 == 0))begin 
                 TL4 <= TL2;
+                TL6 <= (TL1 != 2) ? TL1 : TL3;
                 case(TL1)
                     0:if (Timer == 16) begin
                         Timer <= 0;
-                        TL1 <= 1;
-                        TL6 <= TL1;
+                        TL1 <= 1;                        
                     end
                     1:if ((Timer == 4) && (f16 == 0)) begin
                         Timer <= 0;
                         TL1 <= 2;
-                        TL6 <= TL1;
                         f16 <= 1;
                     end 
                     2:if ((Timer == 4) && (f16 == 1)) begin
@@ -197,25 +196,21 @@ module TLC_main(
                         Timer <= 0;
                         TL3 <= 0;
                         f24 <= 0;
-								TL6 <= 0;
                     end 
                 endcase
                 case(TL3)
                     0:if (Timer == 8) begin
                         Timer <= 0;
                         TL3 <= 1;
-                        TL6 <= TL3;
                     end
                     1:if ((Timer == 4) && (f36 == 0)) begin
                         Timer <= 0;
                         TL3 <= 2;
-                        TL6 <= TL3;
 						f36 <= 1;
                     end 
                     2:if ((Timer == 4) && (f36 == 1)) begin
                         Timer <= 0;
                         TL1 <= 0;
-                        TL6 <= TL3;
 						f36 <= 0;
                     end 
                 endcase
@@ -223,6 +218,7 @@ module TLC_main(
             // when sensor2 is only activated 
             else if ((sensor1 == 0) && (sensor1 == 1)) begin 
                 TL6 <= TL1;
+                TL2 <= (TL4 != 2) ? TL4 : TL5;
                 case(TL1)
                     0:if (Timer == 16) begin
                         Timer <= 0;
@@ -243,12 +239,10 @@ module TLC_main(
                     0:if (Timer == 16) begin
                         Timer <= 0;
                         TL4 = 1;
-                        TL2 <= TL4;
                     end
                     1:if ((Timer == 4) && (f24 == 0)) begin
                         Timer <= 0;
                         TL4 = 2;
-                        TL2 <= TL4;
 						f24 <= 1;
                     end 
                     2:if ((Timer == 4) && (f24 == 1)) begin
@@ -261,17 +255,14 @@ module TLC_main(
                     0:if (Timer == 8) begin
                         Timer <= 0;
                         TL5 = 1;
-                        TL2 <= TL5;
                     end
                     1:if ((Timer == 4) && (f25 == 0)) begin
                         Timer <= 0;
                         TL5 <= 2;
-                        TL2 <= TL5;
 						f25 <= 1;
                     end 
                     2:if ((Timer == 4) && (f25 == 1)) begin
                         Timer <= 0;
-                        TL2 <= TL5;
                         TL1 <= 0;
 						f25 <=0;
                     end 

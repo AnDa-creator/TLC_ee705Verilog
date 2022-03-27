@@ -23,7 +23,7 @@ TLC_topModule dut0 (
  initial begin
 
    clk = 1'b0;
-   sensor1 = 0; sensor2 = 0;
+   sensor1 = 1; sensor2 = 0;
    forever #1 clk = ~clk;
    forever #1000 sensor1 = ~sensor1;
    forever #500 sensor2 = ~sensor2;

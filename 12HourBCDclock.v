@@ -9,7 +9,7 @@ module TwelveHourBCDclock(
     
     // Starting from 1 am
     initial begin
-        hh = 8'b00000001;
+        hh = 8'b00000011;
         ss = 8'b00000000;
         mm = 8'b00000000;
         pm = 1'b1;
@@ -66,7 +66,10 @@ module TwelveHourBCDclock(
         if(~reset) begin
             ss <= 0;
             hh[7:4] <= 0;
-            hh[3:0] <= 1;
+            hh[3:0] <= 3;
+            
+            //hh[7:4] <= 0;
+            //hh[3:0] <= 1;
             pm <= 1;
             mm <= 0;
         end

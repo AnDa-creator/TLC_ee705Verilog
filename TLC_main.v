@@ -110,9 +110,9 @@ module TLC_main(
 		  
             // when both sensors are activated
             if ((sensor1 == 1) && (sensor2 == 1)) begin
-                TL1 <= TL6; 
-                TL2 <= TL4;
-                TL3 <= TL5;
+                TL6 <= TL1; 
+                TL4 <= TL2;
+                TL5 <= TL3;
                 case(TL1)
                     0:if (Timer == 16) begin
                         Timer <= 0;
@@ -210,13 +210,13 @@ module TLC_main(
                         Timer <= 0;
                         TL3 <= 2;
                         TL6 <= TL3;
-								f36 <= 1;
+						f36 <= 1;
                     end 
                     2:if ((Timer == 4) && (f36 == 1)) begin
                         Timer <= 0;
                         TL1 <= 0;
                         TL6 <= TL3;
-								f36 <= 0;
+						f36 <= 0;
                     end 
                 endcase
             end
@@ -231,12 +231,12 @@ module TLC_main(
                     1:if ((Timer == 4) && (f16 == 0))begin
                         Timer <= 0;
                         TL1 <= 2;
-								f16 <= 1;
+						f16 <= 1;
                     end 
                     2:if ((Timer == 4) && (f16 == 1)) begin
                         Timer <= 0;
                         TL4 <= 0;
-								f16 <= 0;
+						f16 <= 0;
                     end 
                 endcase
                 case(TL4)
@@ -249,12 +249,12 @@ module TLC_main(
                         Timer <= 0;
                         TL4 = 2;
                         TL2 <= TL4;
-								f24 <= 1;
+						f24 <= 1;
                     end 
                     2:if ((Timer == 4) && (f24 == 1)) begin
                         Timer <= 0;
                         TL5 <= 0;
-								f24 <= 0;
+						f24 <= 0;
                     end 
                 endcase
                 case(TL5)
@@ -267,20 +267,20 @@ module TLC_main(
                         Timer <= 0;
                         TL5 <= 2;
                         TL2 <= TL5;
-								f25 <= 1;
+						f25 <= 1;
                     end 
                     2:if ((Timer == 4) && (f25 == 1)) begin
                         Timer <= 0;
-                        TL5 <= 0;
                         TL2 <= TL5;
-								f25 <=0;
+                        TL1 <= 0;
+						f25 <=0;
                     end 
                 endcase
             end
             // when all sensors are deactivated
             else begin
-                TL1 <= TL6; 
-                TL2 <= TL4;
+                TL6 <= TL1; 
+                TL4 <= TL2;
                 case(TL1)
                     0:if (Timer == 16) begin
                         Timer <= 0;

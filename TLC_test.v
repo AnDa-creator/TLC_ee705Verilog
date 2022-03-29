@@ -23,11 +23,19 @@ TLC_topModule dut0 (
  initial begin
 
    clk = 1'b0;
-   sensor1 = 1; sensor2 = 0;
    forever #1 clk = ~clk;
-   forever #1000 sensor1 = ~sensor1;
-   forever #500 sensor2 = ~sensor2;
  end
+
+ initial begin
+   sensor2 = 1'b1;
+   forever #1000 sensor2 = ~sensor2;
+ end
+
+ initial begin
+   sensor1 = 1'b0;
+   forever #1000 sensor1 = ~sensor1;
+ end
+  
 
  initial begin
    $dumpvars();
@@ -40,43 +48,3 @@ TLC_topModule dut0 (
  end
 
 endmodule
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

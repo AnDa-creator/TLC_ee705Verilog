@@ -216,7 +216,7 @@ module TLC_main(
                 endcase
             end
             // when sensor2 is only activated 
-            else if ((sensor1 == 0) && (sensor1 == 1)) begin 
+            else if ((sensor1 == 0) && (sensor2 == 1)) begin 
                 TL6 <= TL1;
                 TL2 <= (TL4 != 2) ? TL4 : TL5;
                 case(TL1)
@@ -254,7 +254,7 @@ module TLC_main(
                 case(TL5)
                     0:if (Timer == 8) begin
                         Timer <= 0;
-                        TL5 = 1;
+                        TL5 <= 1;
                     end
                     1:if ((Timer == 4) && (f25 == 0)) begin
                         Timer <= 0;

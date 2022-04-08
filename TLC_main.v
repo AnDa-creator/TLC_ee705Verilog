@@ -5,6 +5,7 @@ module TLC_main(
     input sensor1,
     input sensor2,
     input peak,
+    output reg[7:0] Timer,
     output reg[1:0]  TL1,
     output reg[1:0]  TL2,
     output reg[1:0]  TL3,
@@ -17,12 +18,11 @@ module TLC_main(
     // Do peak off-peak inputs from separate file
     
     
-    integer Timer;
+    // reg[7:0] Timer;
 
     initial begin
 	 
-        // Set Timer and flags to 0
-        Timer <= 0;         
+        // Set Timer and flags to 0         
         Timer <= 0;
         TL1 <= 0;         TL2 <= 2;         TL3 <= 2;        TL4 <= 2;        TL5 <= 2;   
         TL6 <= 0;         f16 <= 0;         f24 <= 0;        f35 <= 0;  		f36 <= 0;
@@ -31,7 +31,7 @@ module TLC_main(
 	 
 	 // Reset conditions below , Initializes to TL1, TL6 green.
 	 
-    always @(posedge clk) 
+    always @(posedge clk) begin
         if (reset == 0) begin
             //initialize lights and flags
             Timer <= 0;
@@ -41,13 +41,12 @@ module TLC_main(
         end
 
     // Increment timer with each positive clock cycle transition
-	always @(posedge clk)
+	
         Timer <= Timer + 1;
 
 		  
 		  
     // Control Traffic light output based on Timer values
-    always @(*) begin
 	 
     // Peak condition cases
         if (peak) begin
@@ -238,11 +237,11 @@ module TLC_main(
                 case(TL4)
                     0:if (Timer == 16) begin
                         Timer <= 0;
-                        TL4 = 1;
+                        TL4 <= 1;
                     end
                     1:if ((Timer == 4) && (f24 == 0)) begin
                         Timer <= 0;
-                        TL4 = 2;
+                        TL4 <= 2;
 						f24 <= 1;
                     end 
                     2:if ((Timer == 4) && (f24 == 1)) begin

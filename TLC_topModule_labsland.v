@@ -1,12 +1,12 @@
 module TLC_topModule_labsland(
     input CLOCK_50,
-    input [3:0] SW; // reset,sensor1.sensor2,peakoffpeak
-    output [17:0] LEDR; //each LED represnts one traffic light so 6*3=18
-    output [6:0] HEX0;
-    output [6:0] HEX1;
-    output [6:0] HEX2;
-    output [6:0] HEX3;
-    output [3:0] LEDG;
+    input [3:0] SW,                       // reset,sensor1.sensor2,peakoffpeak
+    output [17:0] LEDR,                   //each LED represnts one traffic light so 6*3=18
+    output [6:0] HEX0,                    
+    output [6:0] HEX1,
+    output [6:0] HEX2,
+    output [6:0] HEX3,
+    output [3:0] LEDG
 );
 
     wire reset, ena,sensor1, sensor2;
@@ -14,10 +14,11 @@ module TLC_topModule_labsland(
     wire peak, pm;
     wire [7:0] hh, mm, ss;
     wire [3:0] an;
-
-    always @(CLOCK_50) counter = counter + 1;
-    
     wire clk;
+    reg[23:0] counter = 0;
+    always @(CLOCK_50) counter = counter + 1;
+    wire [7:0] timer;
+    
     assign clk = counter[23]; 
 
     assign reset = ~SW[0];
@@ -73,10 +74,11 @@ TLC_main Tlc_1(
     .TL4(TL4),
     .TL5(TL5),
     .TL6(TL6),
-    .peak(peak)
+    .peak(peak),
+    .Timer(timer)
 );
 
-sevenseg_driver timer(
+sevenseg_driver timer1(
  .clk(clk), 
  .clr(1'b0), 
  .in1(mm[7:4]), 

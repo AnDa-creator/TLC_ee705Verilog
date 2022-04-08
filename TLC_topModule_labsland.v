@@ -6,6 +6,8 @@ module TLC_topModule_labsland(
     output [6:0] HEX1,
     output [6:0] HEX2,
     output [6:0] HEX3,
+    output [6:0] HEX4,
+    output [6:0] HEX5,
     output [3:0] LEDG
 );
 
@@ -15,16 +17,17 @@ module TLC_topModule_labsland(
     wire [7:0] hh, mm, ss;
     wire [3:0] an;
     wire clk;
-    reg[23:0] counter = 0;
-    always @(CLOCK_50) counter = counter + 1;
+    reg[24:0] counter = 0;
+    always @(posedge CLOCK_50) counter = counter + 1;
     wire [7:0] timer;
     
-    assign clk = counter[23]; 
+    assign clk = counter[24]; 
 
     assign reset = ~SW[0];
     assign ena =   ~SW[1];
     assign sensor1 = SW[2];
     assign sensor2 = SW[3];
+    assign an[0] = pm;
 
     assign LEDR[0] = (TL1 == 0)? 1:0;
     assign LEDR[1] = (TL1 == 1)? 1:0;
@@ -81,15 +84,18 @@ TLC_main Tlc_1(
 sevenseg_driver timer1(
  .clk(clk), 
  .clr(1'b0), 
- .in1(mm[7:4]), 
- .in2(mm[3:0]), 
- .in3(ss[7:4]), 
- .in4(ss[3:0]), 
- .seg1(HEX3), 
- .seg2(HEX2), 
- .seg3(HEX1), 
- .seg4(HEX0), 
- .an(an));
+ .in1(hh[7:4]), 
+ .in2(hh[3:0]), 
+ .in3(mm[7:4]), 
+ .in4(mm[3:0]),
+ .in5(ss[7:4]),
+ .in6(ss[3:0]),
+ .seg1(HEX5), 
+ .seg2(HEX4), 
+ .seg3(HEX3), 
+ .seg4(HEX2),
+ .seg5(HEX1),
+ .seg6(HEX0));
 
 
 endmodule
@@ -122,29 +128,27 @@ module decoder_7seg(in1,out1);
       
 endmodule
 
-module sevenseg_driver(clk,clr,in1,in2,in3,in4,seg1,seg2, seg3, seg4, an);
+module sevenseg_driver(clk,clr,in1,in2,in3,in4,in5,in6,seg1,seg2, seg3, seg4,seg5,seg6);
 
   input clk;
   input clr;
-  input [3:0] in1, in2, in3, in4;
-//   output reg [6:0] seg = 7'b0;
+  input [3:0] in1, in2, in3, in4, in5, in6;
+
   output [6:0] seg1;
   output [6:0] seg2;
   output [6:0] seg3;
   output [6:0] seg4;
+  output [6:0] seg5;
+  output [6:0] seg6;
 
-  output reg [3:0] an = 4'b0;
 
-//   wire [6:0] seg1, seg2, seg3, seg4;
-  reg [12:0] segclk = 12'b0;
-
-  localparam LEFT = 2'b00, MIDLEFT = 2'b01, MIDRIGHT = 2'b10, RIGHT = 2'b11;
-  reg [1:0] state=LEFT;
 
   decoder_7seg disp1(in1,seg1);
   decoder_7seg disp2(in2,seg2);
   decoder_7seg disp3(in3,seg3);
   decoder_7seg disp4(in4,seg4);
+  decoder_7seg disp5(in5,seg5);
+  decoder_7seg disp6(in6,seg6);
     
 
 endmodule

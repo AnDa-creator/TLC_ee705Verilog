@@ -1,0 +1,86 @@
+module leds_mirror(SW, LEDR, HEX0, CLOCK_50, HEX1);
+input CLOCK_50;
+input [3:0] SW; // reset,sensor1.sensor2,peakoffpeak
+output [17:0] LEDR; //each LED represnts one traffic light so 6*3=18
+output [6:0] HEX0;  //to show time from 0 to 32/16/8/4(2 digit format)
+output [6:0] HEX1;
+
+reg [23:0] counter=0;
+always @(CLOCK_50) counter= counter + 1;
+reg [3:0] tens, ones;
+
+ wire clk;
+ assign clk = counter[23];   
+
+reg [17:0] LEDR;
+reg [6:0] HEX0;
+reg [6:0] HEX1;
+
+endmodule
+
+
+
+module CD(counter,tens,ones);
+
+  input [5:0] counter;
+  output reg [3:0] tens, ones;
+
+  reg [5:0] bcd_data=0;
+
+  always @ (counter) begin
+    bcd_data = counter;
+    tens = bcd_data / 10;
+    ones = bcd_data % 10;
+  end
+
+endmodule
+
+
+module sseg_driver(clk,clr,in1,in2,seg1,seg2, an);
+
+  input clk;
+  input clr;
+  input [3:0] in1, in2;
+  output [6:0] seg1;
+  output [6:0] seg2;
+
+  output reg [3:0] an = 4'b0;
+
+  reg [6:0] segclk = 6'b0;
+
+  localparam LEFT = 2'b00, MIDLEFT = 2'b01, MIDRIGHT = 2'b10, RIGHT = 2'b11;
+  reg [1:0] state=LEFT;
+
+  decode_7seg disp1(in1,seg1);
+  decode_7seg disp2(in2,seg2);
+  
+    
+   always @ (posedge clk) segclk <= segclk + 1'b1;
+
+endmodule
+
+ 
+module decode_7seg(in1,HEX0);
+
+
+  input [3:0] in1;
+  output reg [6:0] HEX0;
+
+  always @ (in1)
+    case (in1)
+      4'b0000 : HEX0=7'b1000000; //0
+      4'b0001 : HEX0=7'b1111001; //1
+      4'b0010 : HEX0=7'b0100100; //2
+      4'b0011 : HEX0=7'b0110000; //3
+      4'b0100 : HEX0=7'b0011001; //4
+      4'b0101 : HEX0=7'b0010010; //5
+      4'b0110 : HEX0=7'b0000010; //6
+      4'b0111 : HEX0=7'b1111000; //7
+      4'b1000 : HEX0=7'b0000000; //8
+      4'b1001 : HEX0=7'b0010000; //9
+    endcase
+      
+endmodule
+
+
+

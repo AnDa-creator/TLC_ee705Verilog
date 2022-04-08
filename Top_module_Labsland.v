@@ -16,7 +16,8 @@ module TLC_topModule_labsland(
     wire [3:0] an;
 
     always @(CLOCK_50) counter = counter + 1;
-
+    
+    wire clk;
     assign clk = counter[23]; 
 
     assign reset = ~SW[0];

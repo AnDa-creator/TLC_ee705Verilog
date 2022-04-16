@@ -206,7 +206,9 @@ wire [7:0] timer;
   
   
 endmodule
-  
+
+
+// Courtesy :: https://verilogcodes.blogspot.com/2015/10/verilog-code-for-8-bit-binary-to-bcd.html
 module bin2bcd(
     bin,
      bcd

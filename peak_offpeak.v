@@ -33,7 +33,7 @@ endmodule
 
 
 
-New edited version as follows------
+// The following code is slightly changed for LabsLand implementation(only variable name is changed to peak1 instead of peak)------
 
 
 

@@ -1,4 +1,4 @@
-// The following code is slightly changed(from peak_offpeak.v) for LabsLand implementation(only variable name is changed to peak1 instead of peak)------
+// The following code is slightly changed(from peak_offpeak1.v) for LabsLand implementation(only variable name is changed to peak1 instead of peak)------
 
 module peak_offpeak(
     input [7:0] hours,

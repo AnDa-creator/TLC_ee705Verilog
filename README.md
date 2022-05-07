@@ -1,7 +1,7 @@
 # TLC_ee705Verilog
 
 ##Introduction and Objectives
-Traffic signals generally operate with a fixed time for red and green lights. To manage traffic better, the fixed time value can be controlled and changed according to traffic conditions. The aim of the project is to implement a Traffic Light Controller (TLC) which will operate according to the traffic load. It is simulated in quartus and also tested on FPGA at [Labsland]{https://iitb.labsland.com/standalone/login}. The objectives for the project can be broadly as follows :
+Traffic signals generally operate with a fixed time for red and green lights. To manage traffic better, the fixed time value can be controlled and changed according to traffic conditions. The aim of the project is to implement a Traffic Light Controller (TLC) which will operate according to the traffic load. It is simulated in quartus and also tested on FPGA at [Labsland](https://iitb.labsland.com/standalone/login). The objectives for the project can be broadly as follows :
 
 * Implement a design of a modern FPGA-based Traffic Light Control (TLC) System to manage the road traffic.
 * Intelligent peak timing method based on sensors, more efficient than usual fixed time method.

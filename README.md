@@ -25,3 +25,6 @@ The input signals to the overall design is as follows :
 * *reset* -- Restart the entire system while set.
 The output signals are :
 * *TL1 to TL6* -- Traffic light outputs, each two bit values with encoding as mentioned earlier.
+
+## RTL Netlist
+<img src="https://cdn.mathpix.com/snip/images/wFVmksz5dBniJ4tTobx6TkljGvWtHKLP0z1OYn5Qi5M.original.fullsize.png">

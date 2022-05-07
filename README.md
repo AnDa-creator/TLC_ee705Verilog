@@ -13,10 +13,10 @@ Traffic signals generally operate with a fixed time for red and green lights. To
 
 The code is implemented in the form of four modules:
 * Clock module -- A twelve hour BCD clock with am and pm indicator.
-* TLC main module -- The state macheine of fig. \ref{fig:state_flow} is implemented here.
+* TLC main module -- The state macheine is implemented here.
 * Peak -  Off-peak module -- Determines the timings of the day to be considered as peak traffic time or not.
 * Top module to integrate all the submodules.
-\end{itemize}
+
 
 The input signals to the overall design is as follows :
 * *clk* -- System clock, set according to time granularity required.
